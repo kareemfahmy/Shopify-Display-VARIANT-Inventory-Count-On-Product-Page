@@ -19,7 +19,7 @@
   ]
 },
 
-// Actual Block (Don't diplay quantity left in stock if stock qunatity is less than 0)
+// Actual Block (Don't diplay quantity left in stock if stock qunatity is 0)
 {%- when 'inventory_count' -%} 
               <div id="inventory-{{ section.id }}" {{ block.shopify_attributes }} style="color: {{ block.settings.text_color }};"> 
                {% if product.selected_or_first_available_variant.inventory_quantity > 0 %}
