@@ -1,0 +1,41 @@
+// Block Schema
+{
+  "type": "inventory_count",
+  "name": "Inventory Count",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "number",
+      "id": "show_inventory_threshold",
+      "label": "Show Inventory Threshold",
+      "default": 0,
+      "info": "Show the inventory count if it falls to this number. Leave at 0 to always show inventory."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color"
+    }
+  ]
+},
+
+// Actual Block 
+{%- when 'inventory_count' -%} 
+              <div id="inventory-{{ section.id }}" {{ block.shopify_attributes }} style="color: {{ block.settings.text_color }};"> 
+               {% if product.selected_or_first_available_variant.inventory_quantity > 0 %}
+                  <p>Only <strong>{{ product.selected_or_first_available_variant.inventory_quantity }}</strong> left in stock</p>
+                {% endif %}
+
+// JavaScript to update the number
+const inventory = document.getElementById(`inventory-${this.dataset.section}`);
+if (inventory) inventory.classList.remove('visibility-hidden'), this.updateInventory(html);
+
+//Update inventory function
+
+updateInventory(html) {
+  const id = `inventory-${this.dataset.section}`;
+  const destination = document.getElementById(id);
+  const source = html.getElementById(id);
+
+  if (source && destination) destination.innerHTML = source.innerHTML;
+}
