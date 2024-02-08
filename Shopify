@@ -19,7 +19,7 @@
   ]
 },
 
-// Actual Block 
+// Actual Block (Don't diplay quantity left in stock if stock qunatity is less than 0)
 {%- when 'inventory_count' -%} 
               <div id="inventory-{{ section.id }}" {{ block.shopify_attributes }} style="color: {{ block.settings.text_color }};"> 
                {% if product.selected_or_first_available_variant.inventory_quantity > 0 %}
@@ -30,7 +30,7 @@
 const inventory = document.getElementById(`inventory-${this.dataset.section}`);
 if (inventory) inventory.classList.remove('visibility-hidden'), this.updateInventory(html);
 
-//Update inventory function
+// Update inventory function
 
 updateInventory(html) {
   const id = `inventory-${this.dataset.section}`;
